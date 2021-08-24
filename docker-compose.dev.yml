@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  heals-dev-dashboard:
+    build: .
+    ports:
+      - 3000:3000
+    # Mount this directory as app src
+    volumes:
+      - ./:/usr/src/heals-dev-dashboard/
+      # Override node_modules and nuxt build with separate volumes
+      # Note: rebuild the container to update any npm deps
+      - /usr/src/heals-frontend/node_modules
+      - /usr/src/heals-frontend/.nuxt
+    entrypoint: ["npm", "run", "dev"]

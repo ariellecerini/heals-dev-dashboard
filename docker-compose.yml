@@ -1,0 +1,9 @@
+version: "3.8"
+
+services:
+  heals-dev-dashboard:
+    build: .
+    ports:
+      - 3000:3000
+  kbqa-service:
+    build: submodules/RPI-HEALS-KBQA

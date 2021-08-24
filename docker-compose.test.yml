@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  dredd:
+    build: submodules/RPI-HEALS-KBQA/api
+    volumes:
+      - ./submodules/RPI-HEALS-KBQA/api:/api/
+    working_dir: /api/
+    entrypoint: >
+      sh -c "
+        echo 'waiting for kbqa-service...' &&
+        wait-on -i 5000 -t 180000 http-get://kbqa-service &&
+        dredd
+      "

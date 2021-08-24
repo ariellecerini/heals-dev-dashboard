@@ -1,0 +1,4 @@
+[submodule "submodules/RPI-HEALS-KBQA"]
+	path = submodules/RPI-HEALS-KBQA
+	url = git@github.com:CognitiveHorizons/RPI-HEALS-KBQA.git
+	branch = dockerversion
