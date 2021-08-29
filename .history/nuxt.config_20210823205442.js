@@ -29,8 +29,7 @@ export default {
     // theme css
     'codemirror/theme/base16-dark.css',
     '~assets/style.css', 
-    '~assets/style-tokens.css',
-    '~assets/dev.css'
+    '~assets/style-tokens.css'
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)

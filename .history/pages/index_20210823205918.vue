@@ -73,24 +73,8 @@
 
     </card>
   </div>
-  <div id="sidebarHome" class="sidebar-holder">
-      <button class="sidebar-toggle" v-on:click="toggleSidebar()">Code Editor</button>
-
-      <div v-if="sidebar_state===1">
-          <div class="sidebar" ref="sidebar">
-              <Codemirror/>
-                </div>
-                </div>
-        </div> 
-  <div class="sticky-footer">
-    <button class="secondary white" v-on:click="isReset()">
-          Reset
-        </button>
-
-        <button class="primary"  v-on:click="isRun()">
-          Continue
-        </button>
-    </div> 
+  
+ 
 
 </div>
 </template>

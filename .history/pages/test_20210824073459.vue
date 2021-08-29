@@ -1,5 +1,7 @@
 <template>
-  <div class="dev container diagram">
+<multipane class="custom-resizer" layout="vertical">
+  <div class="pane">
+     <div class="dev container diagram">
     <div class="dev column col-left">
       <button  v-on:click="connect()">connect</button> 
       <card id="start" class="dev card question-input takes-input">
@@ -73,37 +75,38 @@
 
     </card>
   </div>
-  <div id="sidebarHome" class="sidebar-holder">
-      <button class="sidebar-toggle" v-on:click="toggleSidebar()">Code Editor</button>
-
-      <div v-if="sidebar_state===1">
-          <div class="sidebar" ref="sidebar">
-              <Codemirror/>
-                </div>
-                </div>
-        </div> 
-  <div class="sticky-footer">
-    <button class="secondary white" v-on:click="isReset()">
-          Reset
-        </button>
-
-        <button class="primary"  v-on:click="isRun()">
-          Continue
-        </button>
-    </div> 
+  
+ 
 
 </div>
+  </div>
+  <multipane-resizer></multipane-resizer>
+  <div class="pane" :style="{ flexGrow: 1 }">
+    <div>
+    <div> 
+        <h2>Placeholder</h2> 
+        </div>
+    </div>
+  </div>
+</multipane>
 </template>
 
 <script>
+import { Multipane, MultipaneResizer } from 'vue-multipane';
 import Card from "../components/Card.vue";
 import Accordion from "../components/Accordion.vue"; 
 import Codemirror from "../components/codemirror.vue";
 import LeaderLine from "leader-line-new"; 
 
-
 export default {
-    data () {
+  components: {
+    Multipane,
+    MultipaneResizer,
+    
+
+    Codemirror  },
+
+   data () {
       var sidebar_state = 0; 
         return {
             sidebar_state
@@ -176,11 +179,47 @@ export default {
   mounted() {
   
   }
-}
+
+};
 </script>
 
 <style>
-
+.custom-resizer {
+    width: 100%;
+    /* height: fit-content; */
+    overflow-y: scroll;
+}
+.custom-resizer > .pane {
+  text-align: left;
+  padding: 15px;
+  overflow: hidden;
+  background: #eee;
+  border: 1px solid #ccc;
+}
+.custom-resizer > .pane ~ .pane {
+}
+.custom-resizer > .multipane-resizer {
+  margin: 0; left: 0;
+  position: relative;
+  /* &:before {
+    display: block;
+    content: "";
+    width: 3px;
+    height: 40px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -20px;
+    margin-left: -1.5px;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+  } */
+  /* &:hover {
+    &:before {
+      border-color: #999;
+    }
+  } */
+}
 
 /*dev dashboard*/
 .dev.container.diagram{

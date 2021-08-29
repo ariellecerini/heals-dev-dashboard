@@ -101,14 +101,9 @@ import Accordion from "../components/Accordion.vue";
 import Codemirror from "../components/codemirror.vue";
 import LeaderLine from "leader-line-new"; 
 
-
+var sidebar_state = 0; 
 export default {
-    data () {
-      var sidebar_state = 0; 
-        return {
-            sidebar_state
-        }
-    },
+
   methods: {
     connect: function (){
       new LeaderLine(
@@ -165,10 +160,10 @@ export default {
     toggleSidebar: function () {
 
 
-      if (this.sidebar_state === 1){
-        this.sidebar_state = 0;
-      } else if (this.sidebar_state === 0) {
-        this.sidebar_state = 1; 
+      if (sidebar_state === 1){
+        sidebar_state = 0;
+      } else if (sidebar_state === 0) {
+        sidebar_state = 1; 
       }
     console.log("this ran");
     }
@@ -436,7 +431,7 @@ details[open] summary{
 .sticky-footer{
   position: fixed; 
   width: 100vw; 
-  padding: 1%;
+  padding: 2%;
   background: white; 
   margin-left: -3%;
   bottom: 0; 
@@ -560,9 +555,4 @@ button:disabled{
 
 }
 
-
-.CodeMirror{
-  width: 100%; 
-  height: 90vh; 
-}
 </style>
