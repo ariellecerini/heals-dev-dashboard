@@ -12,3 +12,6 @@ services:
         wait-on -i 5000 -t 180000 http-get://kbqa-service &&
         dredd
       "
+  persona-store:
+    build: submodules/RPI-HEALS-Persona-Store
+    entrypoint: [ "npm", "run", "test" ]

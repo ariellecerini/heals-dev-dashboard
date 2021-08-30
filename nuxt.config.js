@@ -1,5 +1,6 @@
+const personaApiUrl = process.env.PERSONA_API_URL || 'persona backup url??'
+console.log('PAPI', personaApiUrl)
 export default {
-  // Disable server-side rendering (https://go.nuxtjs.dev/ssr-mode)
   ssr: false,
 
   // Global page headers (https://go.nuxtjs.dev/config-head)
@@ -17,9 +18,19 @@ export default {
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
-    { src: '~plugins/nuxt-codemirror-plugin.js', ssr: false },
-    { src: '~plugins/split-layout.js', ssr: false }
+    { src: '~plugins/split-layout.js', mode: 'client' },
+    { src: '~plugins/persona-init.js', mode: 'client' },
+    { src: '~plugins/nuxt-codemirror-plugin.js', mode: 'client' },
   ],
+
+  proxy: {
+    '/api/persona': {
+      target: personaApiUrl,
+      pathRewrite: {
+        '^/api/persona': ''
+      }
+    },
+  },
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
   css: [
@@ -28,7 +39,7 @@ export default {
     'codemirror/addon/merge/merge.css',
     // theme css
     'codemirror/theme/base16-dark.css',
-    '~assets/style.css', 
+    '~assets/style.css',
     '~assets/style-tokens.css',
     '~assets/dev.css'
   ],

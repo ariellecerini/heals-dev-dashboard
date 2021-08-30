@@ -10,6 +10,6 @@ services:
       - ./:/usr/src/heals-dev-dashboard/
       # Override node_modules and nuxt build with separate volumes
       # Note: rebuild the container to update any npm deps
-      - /usr/src/heals-frontend/node_modules
-      - /usr/src/heals-frontend/.nuxt
+      - /usr/src/heals-dev-dashboard/node_modules
+      - /usr/src/heals-dev-dashboard/.nuxt
     entrypoint: ["npm", "run", "dev"]

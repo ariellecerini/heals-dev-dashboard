@@ -1,6 +1,38 @@
 # dev-dashboard
 
+## Cloning
+
+This project uses submodules. Make sure that the submodule code is pulled before building.
+
+On clone:
+
+```shell
+git clone --recurse-submodules [git clone url]
+```
+
+Or, if already cloned without `--recurse-submodules`:
+
+```shell
+git submodule update --init --recursive
+```
+
 ## Build Setup
+
+Build and run in production mode:
+
+```shell
+docker-compose up
+```
+
+Build and run in dev mode with hot reload:
+
+```shell
+docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
+```
+
+### Front-end build info
+
+(This does not apply when running in a docker container)
 
 ```bash
 # install dependencies
