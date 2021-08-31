@@ -1,4 +1,6 @@
 const personaApiUrl = process.env.PERSONA_API_URL || 'persona backup url??'
+const kbqaApiUrl = process.env.KBQA_API_URL || 'kbqa backup url??'
+const entityResolverUrl = process.env.ENTITY_RESOLVER_URL || 'fer backup url??'
 console.log('PAPI', personaApiUrl)
 export default {
   ssr: false,
@@ -23,11 +25,27 @@ export default {
     { src: '~plugins/nuxt-codemirror-plugin.js', mode: 'client' },
   ],
 
+  axios: {
+    proxy: true
+  },
+
   proxy: {
     '/api/persona': {
       target: personaApiUrl,
       pathRewrite: {
         '^/api/persona': ''
+      }
+    },
+    '/api/kbqa': {
+      target: kbqaApiUrl,
+      pathRewrite: {
+        '^/api/kbqa': '/HEALS/api/v1.0'
+      }
+    },
+    '/api/entity_resolver': {
+      target: entityResolverUrl,
+      pathRewrite: {
+        '^/api/entity_resolver': ''
       }
     },
   },
@@ -53,7 +71,8 @@ export default {
 
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [
-    'bootstrap-vue/nuxt'
+    '@nuxtjs/axios',
+    'bootstrap-vue/nuxt',
   ],
 
   bootstrapVue: {
@@ -75,5 +94,11 @@ export default {
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
+    extend (config) {
+      config.module.rules.push({
+        test: /codemirror-default/,
+        loader: 'raw-loader'
+      })
+    }
   }
 }

@@ -9,3 +9,5 @@ sw.*
 
 # Ignore submodule files
 submodules
+
+docker-compose*.yml

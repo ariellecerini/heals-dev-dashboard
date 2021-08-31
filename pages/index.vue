@@ -12,6 +12,11 @@
           id="user-question"
           rows="4"
           cols="50"
+          v-model="inputQuery"
+        />
+        <input type="button"
+               value="Ask Question"
+               @click.prevent="queryForRecommendations"
         />
       </card>
       <card
@@ -21,10 +26,14 @@
         <h6 class="dev box-title">User Dietary Needs and Preferences</h6>
 
         <div class="custom-select">
-          <select>
-            <option value="0">Use Predefined Persona</option>
-            <option value="1">Persona 1</option>
-            <option value="2">Persona 2</option>
+          <select
+            @change="selectPersona($event.target.value)">
+            <option
+              v-for="persona in personaList"
+              :key="persona.persona"
+              :value="persona.persona">
+              Persona {{persona.persona}}
+            </option>
           </select>
         </div>
         <form>
@@ -37,9 +46,9 @@
               style="width: 70%"
               id="AgeInYears"
               type="number"
+              v-model="personaParams.age"
             >
             <span style="margin-left: -23%;">yrs</span>
-            </input>
           </div>
 
           <div style="width: 100%">
@@ -53,6 +62,7 @@
               style="width: 70%"
               type="number"
               label="Weight"
+              v-model="personaParams.weight"
             />
             <span style="margin-left: -23%;">lbs</span>
           </div>
@@ -61,14 +71,15 @@
 
             <label
               style="width: 25%"
-              for="HeightInFt"
+              for="HeightInIn"
             >Height</label>
             <input
-              id="HeightInFt"
+              id="HeightInIn"
               style="width: 70%"
               type="number"
               label="height"
-            /> <span>ft</span>
+              v-model="personaParams.height"
+            /> <span>in</span>
 
           </div>
         </form>
@@ -84,7 +95,7 @@
           <summary>
             Expanded User Question
           </summary>
-          Insert content here
+          {{expandedQuery}}
         </details>
       </div>
       <div class="dev center section2">
@@ -115,7 +126,11 @@
         class="dev was-returned"
       >
         <h6 class="dev box-title">Recommended Recipes</h6>
-
+        <ul>
+          <li v-for="recipe in recommendations" :key="recipe">
+            {{recipe}}
+          </li>
+        </ul>
       </card>
     </div>
     <div
@@ -129,6 +144,7 @@
       <div
         class="sidebar"
         ref="sidebar"
+        v-show="sidebar_state > 0"
       >
         <client-only>
           <Codemirror />
@@ -160,14 +176,29 @@ import Accordion from "../components/Accordion.vue";
 import Codemirror from "../components/codemirror.vue";
 import LeaderLine from "leader-line-new";
 
+import { mapState, mapGetters, mapMutations, mapActions } from "vuex"
+
 export default {
   data() {
-    var sidebar_state = 0;
     return {
-      sidebar_state
+      sidebar_state: 0,
+      inputQuery: '',
+      personaParams: {
+        age: null,
+        height: null,
+        weight: null
+      }
     };
   },
+  computed: {
+    ...mapState('persona', ['personaList', 'selectedPersonaId']),
+    ...mapGetters('persona', ['selectedPersona']),
+    ...mapState('kbqa', ['query', 'expandedQuery', 'recommendations']),
+  },
   methods: {
+    ...mapMutations('persona', ['selectPersona']),
+    ...mapMutations('kbqa', ['setQuery']),
+    ...mapActions('kbqa', ['queryForRecommendations']),
     connect: function() {
       new LeaderLine(
         document.getElementById("start"),
@@ -229,7 +260,27 @@ export default {
       console.log("this ran");
     }
   },
-  mounted() {}
+  watch: {
+    selectedPersonaId: {
+      immediate: true,
+      handler() {
+        const {age, height, weight} = this.selectedPersona.personal_info
+        let [ft, inches] = height.split("'").map(i => parseInt(i))
+        inches += ft*12
+        this.personaParams = {age, height: inches, weight}
+      }
+    },
+    query() {
+      if (this.query !== this.inputQuery) {
+        this.inputQuery = this.query
+      }
+    },
+    inputQuery() {
+      if (this.query !== this.inputQuery) {
+        this.setQuery(this.inputQuery)
+      }
+    }
+  }
 };
 </script>
 

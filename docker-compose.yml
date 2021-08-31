@@ -9,6 +9,10 @@ services:
       - persona-store
     environment:
       - PERSONA_API_URL=http://persona-store/persona
+      - KBQA_API_URL=http://kbqa-service
+      - ENTITY_RESOLVER_URL=http://fuzzy-entity-resolver
+  fuzzy-entity-resolver:
+    build: submodules/RPI-HEALS-Knowledge-Services/fuzzy-entity-resolver
   kbqa-service:
     build: submodules/RPI-HEALS-KBQA
   mongo:

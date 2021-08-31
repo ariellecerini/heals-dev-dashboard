@@ -1,110 +1,77 @@
 
 <template>
   <section class="container">
-    <no-ssr placeholder="Codemirror Loading...">
-      <codemirror v-model="code" 
-                  :options="cmOption"
-                  @cursorActivity="onCmCursorActivity"
-                  @ready="onCmReady"
-                  @focus="onCmFocus"
-                  @blur="onCmBlur">
+    <client-only>
+      <codemirror
+        v-model="code"
+        :options="cmOption"
+        @cursorActivity="onCmCursorActivity"
+        @ready="onCmReady"
+        @focus="onCmFocus"
+        @blur="onCmBlur"
+      >
       </codemirror>
-    </no-ssr>
+    </client-only>
   </section>
 </template>
- 
+
 <script>
-import { codemirror } from 'vue-codemirror'
-  export default {
-    data() {
-      const code =
-`<template>
-  <h1>Hello World!</h1>
-  <codemirror v-model="code" :options="cmOption"></codemirror>
-</template>
-<script>
-  // import 'some-codemirror-resource'
-  export default {
-    data() {
-      return {
-        code: 'const A = 10',
-        cmOption: {
-          tabSize: 4,
-          styleActiveLine: true,
-          lineNumbers: true,
-          line: true,
-          foldGutter: true,
-          styleSelectedText: true,
-          mode: 'text/javascript',
-          keyMap: "sublime",
-          matchBrackets: true,
-          showCursorWhenSelecting: true,
-          theme: "monokai",
-          extraKeys: { "Ctrl": "autocomplete" },
-          hintOptions:{
-            completeSingle: false
+import { codemirror } from "vue-codemirror";
+import defaultCode from "~/assets/codemirror-default"
+export default {
+  data() {
+    return {
+      code: defaultCode,
+      cmOption: {
+        tabSize: 4,
+        foldGutter: true,
+        styleActiveLine: true,
+        lineNumbers: true,
+        line: true,
+        keyMap: "sublime",
+        mode: "text/x-vue",
+        theme: "base16-dark",
+        extraKeys: {
+          F11(cm) {
+            cm.setOption("fullScreen", !cm.getOption("fullScreen"));
+          },
+          Esc(cm) {
+            if (cm.getOption("fullScreen")) cm.setOption("fullScreen", false);
           }
         }
       }
-    }
-  }
-<\/script>
-<style lang="scss">
-  @import './sass/mixins';
-  @import './sass/variables';
-  main {
-    position: relative;
-  }
-</style>`
-      return {
-        code,
-        cmOption: {
-          tabSize: 4,
-          foldGutter: true,
-          styleActiveLine: true,
-          lineNumbers: true,
-          line: true,
-          keyMap: "sublime",
-          mode: 'text/x-vue',
-          theme: 'base16-dark',
-          extraKeys: {
-            'F11'(cm) {
-              cm.setOption("fullScreen", !cm.getOption("fullScreen"))
-            },
-            'Esc'(cm) {
-              if (cm.getOption("fullScreen")) cm.setOption("fullScreen", false)
-            }
-          }
-        }
-      }
+    };
+  },
+  components: {
+    codemirror
+  },
+  methods: {
+    onCmCursorActivity(codemirror) {
+      console.log("onCmCursorActivity", codemirror);
     },
-    methods: {
-      onCmCursorActivity(codemirror) {
-        console.log('onCmCursorActivity', codemirror)
-      },
-      onCmReady(codemirror) {
-        console.log('onCmReady', codemirror)
-      },
-      onCmFocus(codemirror) {
-        console.log('onCmFocus', codemirror)
-      },
-      onCmBlur(codemirror) {
-        console.log('onCmBlur', codemirror)
-      }
+    onCmReady(codemirror) {
+      console.log("onCmReady", codemirror);
+    },
+    onCmFocus(codemirror) {
+      console.log("onCmFocus", codemirror);
+    },
+    onCmBlur(codemirror) {
+      console.log("onCmBlur", codemirror);
     }
-  }
+  },
+};
 </script>
- 
+
 <style scoped>
-  .container {
-    width: 100%;
-    height: 100%;
-  }
-  .CodeMirror.cm-s-base16-dark{
-      height: 100%; 
-  }
-  .vue-codemirror{
-      width: 100%; 
-      height: 100%
-  }
+.container {
+  width: 100%;
+  height: 100%;
+}
+.CodeMirror.cm-s-base16-dark {
+  height: 100%;
+}
+.vue-codemirror {
+  width: 100%;
+  height: 100%;
+}
 </style>

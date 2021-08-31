@@ -2,9 +2,6 @@ version: '3.8'
 
 services:
   heals-dev-dashboard:
-    build: .
-    ports:
-      - 3000:3000
     # Mount this directory as app src
     volumes:
       - ./:/usr/src/heals-dev-dashboard/
@@ -13,3 +10,6 @@ services:
       - /usr/src/heals-dev-dashboard/node_modules
       - /usr/src/heals-dev-dashboard/.nuxt
     entrypoint: ["npm", "run", "dev"]
+  persona-store:
+    ports:
+      - "8080:80"
