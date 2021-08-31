@@ -211,21 +211,18 @@ form span{
 
 details {
     border-radius: 0; 
-    box-shadow: -3px 6px 6px #00000019;
-
     background: var(--cardBackground) 0% 0% no-repeat padding-box;
     width: 90%; 
-    margin: 0 auto; 
     /* height: 100%; */
     padding: 25px;
     /* margin: auto; */
 }
 
-details.static-output{
+details .static-output{
   box-shadow: 0 0 3px #00000016;
 }
 
-details.takes-input[open]{
+details .takes-input[open]{
 
     box-shadow: -3px 6px 6px #00000019;
   
@@ -233,7 +230,7 @@ details.takes-input[open]{
   
 }
 
-details.static-output[open]{
+details .static-output[open]{
     box-shadow: inset 0px 0px 6px #00000029;
 }
 
@@ -496,5 +493,5 @@ margin: 0;
 }
 
 .section{
-  margin: 20px auto;
+  margin: 20px 0;
 }

@@ -221,11 +221,11 @@ details {
     /* margin: auto; */
 }
 
-details.static-output{
+details .static-output{
   box-shadow: 0 0 3px #00000016;
 }
 
-details.takes-input[open]{
+details .takes-input[open]{
 
     box-shadow: -3px 6px 6px #00000019;
   
@@ -233,7 +233,7 @@ details.takes-input[open]{
   
 }
 
-details.static-output[open]{
+details .static-output[open]{
     box-shadow: inset 0px 0px 6px #00000029;
 }
 

@@ -211,8 +211,7 @@ form span{
 
 details {
     border-radius: 0; 
-    box-shadow: -3px 6px 6px #00000019;
-
+    
     background: var(--cardBackground) 0% 0% no-repeat padding-box;
     width: 90%; 
     margin: 0 auto; 
