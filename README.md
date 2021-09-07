@@ -34,4 +34,4 @@ nvm install 14.17.0
 
 After installing the proper Node version, you can go ahead and install the application dependencies and run the application. 
 
-### Please note: You will need to switch your node version everytime you open a new terminal window. If you do not you will likely receive errors about incompatible dependencies. 
+Please note: You will need to switch your node version everytime you open a new terminal window. If you do not you will likely receive errors about incompatible dependencies. 
