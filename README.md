@@ -23,7 +23,7 @@ For detailed explanation on how things work, check out [Nuxt.js docs](https://nu
 ## Mac Users 
 
 If you are using an Apple computer, you will need to install Node Version Manager before installing the application dependencies. 
-For instructions on how to install nvm using Homebrew [click here] (https://github.com/semantics-for-personal-health/heals-dev-dashboard.git).
+For instructions on how to install nvm using Homebrew [click here](https://github.com/semantics-for-personal-health/heals-dev-dashboard.git).
 
 
 Once you have nvm installed, via terminal, navigate into your cloned git repository. Enter the following command.
