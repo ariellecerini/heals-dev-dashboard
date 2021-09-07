@@ -4,7 +4,7 @@
         <div class="pane full-width" style="overflow-y: scroll;">
             <div class="dev full-width container diagram" id="diagram">
                 <div class="dev full-width section">
-                  
+                    <button  v-on:click="connect()">connect</button> 
                         <div class="flex full-width flex-row space-between">
 
                             <!-- <card id="takesInput" class="dev details takes-input margin-right-base" > -->
@@ -237,73 +237,6 @@ export default {
         }
     
     });
-
-     window.addEventListener("resize", function(){
-      // var lines = 
-      document.getElementsByClassName('leader-line').removeAll; 
-        // for (let i = 0; i < lines.length; i++) {
-
-        // document.getElementById('diagram').appendChild(lines[i]);
-        // }
-
-       new LeaderLine(
-        document.getElementById('start'),
-        document.getElementById('end'), {
-          color: 'black',
-          path: 'grid',
-          startSocket:'bottom',
-          endSocket: 'right'
-        }
-
-        );
-      new LeaderLine(
-        document.getElementById('takesInput'),
-        document.getElementById('end'), {
-          color: 'black',
-          path: 'grid',
-          startSocket:'bottom',
-          endSocket: 'left'
-        }
-        );
-      new LeaderLine(
-        document.getElementById('end'),
-        document.getElementById('KBQA'), {
-          color: 'black',
-          path: 'grid',
-          startSocket:'bottom',
-          endSocket: 'top'
-        }
-        );
-      new LeaderLine(
-        document.getElementById('foodKG'),
-        document.getElementById('KBQA'), {
-          color: 'black',
-          path: 'grid',
-          startSocket:'left',
-          endSocket: 'right'
-        }
-        );
-      new LeaderLine(
-        document.getElementById('KBQA'),
-        document.getElementById('returned'), {
-          color: 'black',
-          path: 'grid',
-          startSocket:'bottom',
-          endSocket: 'top'
-        }
-        );
-
-        var lines = document.getElementsByClassName('leader-line'); 
-        for (let i = 0; i < lines.length; i++) {
-
-        document.getElementById('diagram').appendChild(lines[i]);
-        }
-    
-    });
-
-
-
-
   }
 
 };

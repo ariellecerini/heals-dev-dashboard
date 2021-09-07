@@ -2,9 +2,9 @@
 <div>
     <multipane class="custom-resizer" layout="vertical">
         <div class="pane full-width" style="overflow-y: scroll;">
-            <div class="dev full-width container diagram" id="diagram">
+            <div class="dev full-width container diagram" >
                 <div class="dev full-width section">
-                  
+                    <button  v-on:click="connect()">connect</button> 
                         <div class="flex full-width flex-row space-between">
 
                             <!-- <card id="takesInput" class="dev details takes-input margin-right-base" > -->
@@ -42,13 +42,13 @@
                 </div>
                 <div class="dev full-width section">
                     <div class="flex full-width flex-row space-around">
-                        <div id="KBQA" class='dev KBQA' style="width: fit-content; margin: auto;">
-                            <card class="dev static-entities" style="margin: 0; width: 100%;">
+                        <div id="KBQA" class='dev KBQA' style="width: 20%;">
+                            <card class="dev static-entities">
                                 <h6 class="dev box-title">KBQA</h6>
                             </card>
                         </div>  
-                        <div id="foodKG" class="foodKG" style="width: fit-content; margin: auto;">
-                            <card class="dev static-entities" style="width: 100%; max-width: 250px; margin:0; ">
+                        <div id="foodKG" class="foodKG" style="width: 80%;">
+                            <card class="dev static-entities" style="width: 100%; max-width: 250px; margin-right: auto;">
                                 <h6 class="dev box-title"> Food KG</h6>
                             </card> 
                         </div>
@@ -116,8 +116,8 @@ export default {
         document.getElementById('end'), {
           color: 'black',
           path: 'grid',
-          startSocket:'bottom',
-          endSocket: 'right'
+          startSocket:'right',
+          endSocket: 'left'
         }
 
         );
@@ -126,7 +126,7 @@ export default {
         document.getElementById('end'), {
           color: 'black',
           path: 'grid',
-          startSocket:'bottom',
+          startSocket:'right',
           endSocket: 'left'
         }
         );
@@ -134,18 +134,16 @@ export default {
         document.getElementById('end'),
         document.getElementById('KBQA'), {
           color: 'black',
-          path: 'grid',
-          startSocket:'bottom',
-          endSocket: 'top'
+          path: 'straight',
+          startSocket:'right',
+          endSocket: 'left'
         }
         );
       new LeaderLine(
         document.getElementById('foodKG'),
         document.getElementById('KBQA'), {
           color: 'black',
-          path: 'grid',
-          startSocket:'left',
-          endSocket: 'right'
+          path: 'straight'
         }
         );
       new LeaderLine(
@@ -153,16 +151,10 @@ export default {
         document.getElementById('returned'), {
           color: 'black',
           path: 'grid',
-          startSocket:'bottom',
-          endSocket: 'top'
+          startSocket:'right',
+          endSocket: 'left'
         }
         );
-
-        var lines = document.getElementsByClassName('leader-line'); 
-        for (let i = 0; i < lines.length; i++) {
-
-        document.getElementById('diagram').appendChild(lines[i]);
-        }
     }, 
     isReset: function (){
 
@@ -182,128 +174,7 @@ export default {
     }
   },
   mounted() {
-  window.addEventListener("load", function(){
-       new LeaderLine(
-        document.getElementById('start'),
-        document.getElementById('end'), {
-          color: 'black',
-          path: 'grid',
-          startSocket:'bottom',
-          endSocket: 'right'
-        }
-
-        );
-      new LeaderLine(
-        document.getElementById('takesInput'),
-        document.getElementById('end'), {
-          color: 'black',
-          path: 'grid',
-          startSocket:'bottom',
-          endSocket: 'left'
-        }
-        );
-      new LeaderLine(
-        document.getElementById('end'),
-        document.getElementById('KBQA'), {
-          color: 'black',
-          path: 'grid',
-          startSocket:'bottom',
-          endSocket: 'top'
-        }
-        );
-      new LeaderLine(
-        document.getElementById('foodKG'),
-        document.getElementById('KBQA'), {
-          color: 'black',
-          path: 'grid',
-          startSocket:'left',
-          endSocket: 'right'
-        }
-        );
-      new LeaderLine(
-        document.getElementById('KBQA'),
-        document.getElementById('returned'), {
-          color: 'black',
-          path: 'grid',
-          startSocket:'bottom',
-          endSocket: 'top'
-        }
-        );
-
-        var lines = document.getElementsByClassName('leader-line'); 
-        for (let i = 0; i < lines.length; i++) {
-
-        document.getElementById('diagram').appendChild(lines[i]);
-        }
-    
-    });
-
-     window.addEventListener("resize", function(){
-      // var lines = 
-      document.getElementsByClassName('leader-line').removeAll; 
-        // for (let i = 0; i < lines.length; i++) {
-
-        // document.getElementById('diagram').appendChild(lines[i]);
-        // }
-
-       new LeaderLine(
-        document.getElementById('start'),
-        document.getElementById('end'), {
-          color: 'black',
-          path: 'grid',
-          startSocket:'bottom',
-          endSocket: 'right'
-        }
-
-        );
-      new LeaderLine(
-        document.getElementById('takesInput'),
-        document.getElementById('end'), {
-          color: 'black',
-          path: 'grid',
-          startSocket:'bottom',
-          endSocket: 'left'
-        }
-        );
-      new LeaderLine(
-        document.getElementById('end'),
-        document.getElementById('KBQA'), {
-          color: 'black',
-          path: 'grid',
-          startSocket:'bottom',
-          endSocket: 'top'
-        }
-        );
-      new LeaderLine(
-        document.getElementById('foodKG'),
-        document.getElementById('KBQA'), {
-          color: 'black',
-          path: 'grid',
-          startSocket:'left',
-          endSocket: 'right'
-        }
-        );
-      new LeaderLine(
-        document.getElementById('KBQA'),
-        document.getElementById('returned'), {
-          color: 'black',
-          path: 'grid',
-          startSocket:'bottom',
-          endSocket: 'top'
-        }
-        );
-
-        var lines = document.getElementsByClassName('leader-line'); 
-        for (let i = 0; i < lines.length; i++) {
-
-        document.getElementById('diagram').appendChild(lines[i]);
-        }
-    
-    });
-
-
-
-
+  
   }
 
 };
