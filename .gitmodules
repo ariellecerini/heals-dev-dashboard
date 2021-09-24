@@ -1,0 +1,11 @@
+[submodule "submodules/RPI-HEALS-KBQA"]
+	path = submodules/RPI-HEALS-KBQA
+	url = git@github.com:CognitiveHorizons/RPI-HEALS-KBQA.git
+	branch = dockerversion
+[submodule "submodules/RPI-HEALS-Persona-Store"]
+	path = submodules/RPI-HEALS-Persona-Store
+	url = git@github.com:semantics-for-personal-health/RPI-HEALS-Persona-Store.git
+[submodule "submodules/RPI-HEALS-Knowledge-Services"]
+	path = submodules/RPI-HEALS-Knowledge-Services
+	url = git@github.com:CognitiveHorizons/RPI-HEALS-Knowledge-Services.git
+	branch = dockerversion

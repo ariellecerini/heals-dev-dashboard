@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+  heals-dev-dashboard:
+    build: .
+    ports:
+      - 3000:3000
+    depends_on:
+      - persona-store
+    environment:
+      - PERSONA_API_URL=http://persona-store/persona
+      - KBQA_API_URL=http://kbqa-service
+      - ENTITY_RESOLVER_URL=http://fuzzy-entity-resolver
+  fuzzy-entity-resolver:
+    build: submodules/RPI-HEALS-Knowledge-Services/fuzzy-entity-resolver
+  kbqa-service:
+    build: submodules/RPI-HEALS-KBQA
+  mongo:
+    image: mongo:5.0.2-focal
+    restart: always
+  persona-store:
+    build: submodules/RPI-HEALS-Persona-Store
+    environment:
+      - MONGO_URL=mongodb://mongo:27017/
+      - MONGO_DB=persona
+    depends_on:
+      - mongo

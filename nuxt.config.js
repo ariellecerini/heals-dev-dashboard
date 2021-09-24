@@ -1,5 +1,8 @@
+const personaApiUrl = process.env.PERSONA_API_URL || 'persona backup url??'
+const kbqaApiUrl = process.env.KBQA_API_URL || 'kbqa backup url??'
+const entityResolverUrl = process.env.ENTITY_RESOLVER_URL || 'fer backup url??'
+console.log('PAPI', personaApiUrl)
 export default {
-  // Disable server-side rendering (https://go.nuxtjs.dev/ssr-mode)
   ssr: false,
 
   // Global page headers (https://go.nuxtjs.dev/config-head)
@@ -17,9 +20,35 @@ export default {
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
-    { src: '~plugins/nuxt-codemirror-plugin.js', ssr: false },
-    { src: '~plugins/split-layout.js', ssr: false }
+    { src: '~plugins/split-layout.js', mode: 'client' },
+    { src: '~plugins/persona-init.js', mode: 'client' },
+    { src: '~plugins/nuxt-codemirror-plugin.js', mode: 'client' },
   ],
+
+  axios: {
+    proxy: true
+  },
+
+  proxy: {
+    '/api/persona': {
+      target: personaApiUrl,
+      pathRewrite: {
+        '^/api/persona': ''
+      }
+    },
+    '/api/kbqa': {
+      target: kbqaApiUrl,
+      pathRewrite: {
+        '^/api/kbqa': '/HEALS/api/v1.0'
+      }
+    },
+    '/api/entity_resolver': {
+      target: entityResolverUrl,
+      pathRewrite: {
+        '^/api/entity_resolver': ''
+      }
+    },
+  },
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
   css: [
@@ -28,7 +57,7 @@ export default {
     'codemirror/addon/merge/merge.css',
     // theme css
     'codemirror/theme/base16-dark.css',
-    '~assets/style.css', 
+    '~assets/style.css',
     '~assets/style-tokens.css',
     '~assets/dev.css'
   ],
@@ -42,7 +71,8 @@ export default {
 
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [
-    'bootstrap-vue/nuxt'
+    '@nuxtjs/axios',
+    'bootstrap-vue/nuxt',
   ],
 
   bootstrapVue: {
@@ -64,5 +94,11 @@ export default {
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
+    extend (config) {
+      config.module.rules.push({
+        test: /codemirror-default/,
+        loader: 'raw-loader'
+      })
+    }
   }
 }
