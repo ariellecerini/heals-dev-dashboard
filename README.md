@@ -1,22 +1,29 @@
 # dev-dashboard
 
-## Cloning
+## Setup
 
-This project uses submodules. Make sure that the submodule code is pulled before building.
+### Requirements
 
-On clone:
+* [Docker](https://docs.docker.com/get-docker/)
+* [Docker Compose](https://docs.docker.com/compose/install/) (Already included with Docker Desktop on Mac/Windows)
+
+### Clone Project Submodules
+
+This project uses git submodules which are not fully downloaded with `git clone`
+
+When you clone this repo:
 
 ```shell
-git clone --recurse-submodules [git clone url]
+git clone --recurse-submodules git@github.com:semantics-for-personal-health/heals-dev-dashboard.git
 ```
 
-Or, if already cloned without `--recurse-submodules`:
+Alternatively, if you already cloned this repo without `--recurse-submodules`,  you can pull the submodules separately:
 
 ```shell
 git submodule update --init --recursive
 ```
 
-## Build Setup
+### Build and Run
 
 Build and run in production mode:
 
@@ -24,15 +31,23 @@ Build and run in production mode:
 docker-compose up
 ```
 
-Build and run in dev mode with hot reload:
+The dashboard page will be accessible on [http://localhost:3000](http://localhost:3000)
+
+## Development
+
+### Docker
+
+Use the development compose file to build and run in dev mode with hot reload:
 
 ```shell
 docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
 ```
 
-### Front-end build info
+### Frontend only without docker
 
-(This does not apply when running in a docker container)
+(Queries will not function properly without docker services)
+
+Requires nodejs version 14.17.  Recommend using nvm.
 
 ```bash
 # install dependencies
@@ -51,12 +66,10 @@ $ npm run generate
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
 
+### Mac Users
 
-## Mac Users 
-
-If you are using an Apple computer, you will need to install Node Version Manager before installing the application dependencies. 
+If you are using an Apple computer, you will need to install Node Version Manager before installing the application dependencies.
 For instructions on how to install nvm using Homebrew [click here](https://github.com/semantics-for-personal-health/heals-dev-dashboard.git).
-
 
 Once you have nvm installed, via terminal, navigate into your cloned git repository. Enter the following command.
 
@@ -64,6 +77,6 @@ Once you have nvm installed, via terminal, navigate into your cloned git reposit
 nvm install 14.17.0
 ```
 
-After installing the proper Node version, you can go ahead and install the application dependencies and run the application. 
+After installing the proper Node version, you can go ahead and install the application dependencies and run the application.
 
-Please note: You will need to switch your node version everytime you open a new terminal window. If you do not you will likely receive errors about incompatible dependencies. 
+Please note: You will need to switch your node version everytime you open a new terminal window. If you do not you will likely receive errors about incompatible dependencies.
